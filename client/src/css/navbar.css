@@ -1,0 +1,37 @@
+.navbar {
+    /* background-color: #cecfcf; */
+    padding: 10px;
+    display: flex;
+    /* align-items: right; */
+    justify-content: end;
+    margin: 10px;
+  }
+  .navel{
+    background-color: #cecfcf; 
+  }
+  .logo {
+    width: 50px;
+    height: auto;
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  li {
+    margin-right: 15px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+  }
+  
+  a:hover {
+    color: #188cf2;
+  }
+  
