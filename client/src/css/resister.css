@@ -43,9 +43,15 @@
   }
   
   body {
+    height: 100vh;
+    margin: 0;
     background-image: url("../assets/bg.jpg");
     background-size: 300px;
     background-position: center;
-    background-repeat: unset;
+    background-repeat:inherit;
   }
   
+  .shrijan{
+    color: #ccc;
+    font-weight: bold;
+  }

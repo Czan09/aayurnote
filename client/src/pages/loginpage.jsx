@@ -35,7 +35,7 @@ function LoginPage({ onLogin }) {
           onChange={(e) => setPassword(e.target.value)} />
       </div>
       {error && <div className="error-message">{error}</div>}
-      <button onClick={handleLogin}>Login</button>
+      <button className='shrijan' onClick={handleLogin}>Login</button>
     </div>
     </div>
   );

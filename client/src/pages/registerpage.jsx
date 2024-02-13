@@ -39,7 +39,7 @@ function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)} />
       </div>
-      <button onClick={handleRegister}>Register</button>
+      <button className='shrijan' onClick={handleRegister}>Register</button>
     </div>
   );
 }
