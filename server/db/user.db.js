@@ -2,9 +2,7 @@
 const pool = require(`../utils/conn`);
 
 const getAllUsersDb = async () => {
-  const { rows: users } = await pool.query(
-    `SELECT * from users `
-  );
+  const { rows: users } = await pool.query(`SELECT * from users `);
   return users;
 };
 const getUserByIdDb = async (id) => {
@@ -15,32 +13,24 @@ const getUserByIdDb = async (id) => {
 };
 
 const getDetailbyId = async (id) => {
-  console.log("db "+id)
+  console.log("db " + id);
   const { rows: users } = await pool.query(
     `SELECT  username,email,role FROM users WHERE id = ${id}`
   );
   return users;
 };
 
-const createUserDb = async ({
-    username,
-    email,
-    password
-}) => {
+const createUserDb = async ({ username, email, password }) => {
   const { rows: users } = await pool.query(
     `
-    INSERT INTO USERS(username,email,password) 
+    INSERT INTO users(username,email,password) 
     VALUES ('${username}','${email}','${password}')
   returning username,email,password`
   );
   return users[0];
 };
 
-const updateUserByID = async ({
-  id,
-  username,
-  email
-}) => {
+const updateUserByID = async ({ id, username, email }) => {
   const { rows: users } = await pool.query(
     `UPDATE users SET username='${username}',email='${email}' WHERE id =${id}`
   );

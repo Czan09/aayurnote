@@ -6,13 +6,13 @@ const getAllUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { username,email,password } = req.body;
+  const { username, email, password } = req.body;
   console.log(req.body);
   // try {
   const user = await userService.createUser({
     username,
     email,
-    password
+    password,
   });
   res.status(201).json({
     status: "success",
@@ -30,7 +30,7 @@ const getUserByID = async (req, res) => {
     const user = await userService.getUserById(id);
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
   // }
   // throw new ErrorHandler(401, "Unauthorized");
@@ -38,13 +38,13 @@ const getUserByID = async (req, res) => {
 
 const getDetailbyId = async (req, res) => {
   const id = req.params.id;
-  console.log("cont "+id)
+  console.log("cont " + id);
   // if (req.user.role.includes("admin")) {
   try {
     const user = await userService.getDetailbyId(id);
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
   // }
   // throw new ErrorHandler(401, "Unauthorized");
@@ -52,23 +52,22 @@ const getDetailbyId = async (req, res) => {
 
 const updateUserByID = async (req, res) => {
   const { id } = req.params;
-  const { username,email} = req.body;
+  const { username, email } = req.body;
   // if (req.user.role.includes("admin")) {
   try {
     const user = await userService.updateUserByID({
       id,
       username,
-      email
+      email,
     });
 
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
   // }
   // throw new ErrorHandler(401, "Unauthorized");
 };
-
 
 const changeUserPassword = async (req, res) => {
   const { id } = req.params;
@@ -83,7 +82,7 @@ const changeUserPassword = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
   // }
   // throw new ErrorHandler(401, "Unauthorized");
@@ -96,7 +95,7 @@ const deleteUserByID = async (req, res) => {
     const user = await userService.deleteUserByID(id);
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
   // }
   // throw new ErrorHandler(401, "Unauthorized");
