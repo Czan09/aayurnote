@@ -3,7 +3,6 @@ const noteService = require("../services/note.service");
 // Get all notes
 const getAllNotes = async (req, res) => {
   try {
-    console.log("reached controller");
     const notes = await noteService.getAllNotes();
     res.json(notes);
   } catch (error) {
