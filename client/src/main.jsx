@@ -5,6 +5,7 @@ import Homepage from "./pages/homepage";
 import LoginPage from "./pages/loginpage";
 import Navbar from "./components/navbar";
 import Navbar1 from "./components/navbar-login";
+import Navbar2 from "./components/navbar-admin";
 import Register from "./pages/registerpage";
 import Profile from "./pages/profilepage";
 
@@ -13,8 +14,9 @@ import NotFoundPage from "./pages/NotFoundPage";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Navbar />
-      {/* <Navbar1 /> */}
+      {/* <Navbar />
+      <Navbar1 /> */}
+      <Navbar2 />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<LoginPage />} />
