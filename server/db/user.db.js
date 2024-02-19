@@ -13,7 +13,7 @@ const getUserByIdDb = async (id) => {
 };
 
 const getDetailbyId = async (id) => {
-  console.log("db " + id);
+  // console.log("db " + id);
   const { rows: users } = await pool.query(
     `SELECT  username,email,role FROM users WHERE id = ${id}`
   );

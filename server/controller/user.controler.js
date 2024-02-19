@@ -38,7 +38,7 @@ const getUserByID = async (req, res) => {
 
 const getDetailbyId = async (req, res) => {
   const id = req.params.id;
-  console.log("cont " + id);
+  // console.log("cont " + id);
   // if (req.user.role.includes("admin")) {
   try {
     const user = await userService.getDetailbyId(id);
