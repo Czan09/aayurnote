@@ -1,4 +1,4 @@
-import '../css/homepage.css'
+import "../css/homepage.css";
 
 const Homepage = () => {
   return (
@@ -7,7 +7,7 @@ const Homepage = () => {
       <p>A web server where you can digitally record your important datas</p>
       <p>Feel free to explore and enjoy your stay!</p>
     </div>
-  )
-}
+  );
+};
 
 export default Homepage;
