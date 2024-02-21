@@ -36,6 +36,20 @@ const getUserByID = async (req, res) => {
   // throw new ErrorHandler(401, "Unauthorized");
 };
 
+const getUserByEmail = async (req, res) => {
+  const { email } = req.body;
+  console.log(email + "+");
+  // if (req.user.role.includes("admin")) {
+  try {
+    const user = await userService.getUserByEmail(email);
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+  }
+  // }
+  // throw new ErrorHandler(401, "Unauthorized");
+};
+
 const getDetailbyId = async (req, res) => {
   const id = req.params.id;
   // console.log("cont " + id);
@@ -105,6 +119,7 @@ module.exports = {
   getAllUser,
   createUser,
   getUserByID,
+  getUserByEmail,
   getDetailbyId,
   updateUserByID,
   deleteUserByID,

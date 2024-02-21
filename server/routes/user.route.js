@@ -2,6 +2,7 @@ const {
   getAllUser,
   createUser,
   getUserByID,
+  getUserByEmail,
   getDetailbyId,
   updateUserByID,
   deleteUserByID,
@@ -20,5 +21,6 @@ router
   .put(updateUserByID)
   .delete(deleteUserByID);
 router.route("/user/detail/:id").get(getDetailbyId);
+router.route("/user/email").post(getUserByEmail);
 router.route("/user/pass/:id").put(changeUserPassword);
 module.exports = router;

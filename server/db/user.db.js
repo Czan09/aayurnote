@@ -12,6 +12,14 @@ const getUserByIdDb = async (id) => {
   return users;
 };
 
+const getUserByEmail = async (email) => {
+  console.log(email);
+  const { rows: users } = await pool.query(
+    `SELECT email,password,role FROM users WHERE email='${email}'`
+  );
+  return users;
+};
+
 const getDetailbyId = async (id) => {
   // console.log("db " + id);
   const { rows: users } = await pool.query(
@@ -55,6 +63,7 @@ const deleteUserByID = async (id) => {
 module.exports = {
   getAllUsersDb,
   getUserByIdDb,
+  getUserByEmail,
   getDetailbyId,
   createUserDb,
   updateUserByID,

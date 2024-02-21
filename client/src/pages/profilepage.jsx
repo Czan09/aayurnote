@@ -8,9 +8,10 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/user/detail/5");
-        console.log(response.data); // Log the response data
-        setUser(response.data); // Set the user state with the fetched data
+        const id = 6;
+        const response = await axios.get("/api/user/detail/" + id);
+        console.log(response.data);
+        setUser(response.data);
       } catch (error) {
         console.error("Error fetching user:", error);
       }
@@ -25,10 +26,10 @@ function Profile() {
       {user ? (
         <>
           <div className="centerme">
-            <strong>Username:</strong> {user.username}
+            <strong>Username:</strong> {user[0].username}
           </div>
           <div className="centerme">
-            <strong>Email:</strong> {user.email}
+            <strong>Email:</strong> {user[0].email}
           </div>
         </>
       ) : (

@@ -9,7 +9,7 @@ import Admin from "./private/admin";
 import User from "./private/user";
 import NotFoundPage from "./pages/NotFoundPage";
 function App() {
-  const CurrentUser = "User";
+  const CurrentUser = "Public";
   return CurrentUser === Role.Public ? (
     <>
       <Navbar />

@@ -1,6 +1,7 @@
 const {
   getAllUsersDb,
   getUserByIdDb,
+  getUserByEmail,
   getDetailbyId,
   createUserDb,
   updateUserByID,
@@ -13,23 +14,33 @@ class UserService {
     try {
       return await getAllUsersDb();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   createUser = async (user) => {
     try {
       return await createUserDb(user);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
-  getUserById = async (id) => {
+  getUserById = async (email) => {
     try {
-      const user = await getUserByIdDb(id);
+      const user = await getUserByIdDb(email);
       console.log(user);
       return user;
     } catch (error) {
-      console.log(error)
+      console.log(error);
+    }
+  };
+
+  getUserByEmail = async (id) => {
+    try {
+      const user = await getUserByEmail(id);
+      console.log(user);
+      return user;
+    } catch (error) {
+      console.log(error);
     }
   };
   getDetailbyId = async (id) => {
@@ -38,7 +49,7 @@ class UserService {
       console.log(user);
       return user;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   updateUserByID = async (id) => {
@@ -47,7 +58,7 @@ class UserService {
       console.log(user);
       return user;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   deleteUserByID = async (ID) => {
@@ -55,7 +66,7 @@ class UserService {
       const user = await deleteUserByID(ID);
       return user;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   changeUserPassword = async (id) => {
@@ -63,7 +74,7 @@ class UserService {
       const user = await changeUserPasswordDB(id);
       return user;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 }
