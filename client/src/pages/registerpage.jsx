@@ -9,6 +9,7 @@ function Register() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const postData = {
     username: username,
@@ -18,15 +19,24 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios
-        .post("/api/user", postData)
-        .then((response) => {
-          console.log("Respo+nse:", response.data);
-        });
+      if (username === "" || email === "" || password === "") {
+        console.log("username or email or Password empty");
+        setError("username or email or Password empty");
+        return;
+      }
+
+      const checkEmail = await axios.post("/api/user/email", { email: email });
+      console.log(checkEmail);
+      if (checkEmail.data.length !== 0) {
+        console.log("User already exists");
+        setError("User already exists");
+        return;
+      }
+
+      const response = await axios.post("/api/user", postData);
+      console.log("Response:", response.data);
+
       navigate("/login");
-      console.log(username);
-      console.log(email);
-      console.log(password);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -63,6 +73,7 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {error && <div className="error-message">{error}</div>}
         <button className="shrijan">Register</button>
       </form>
     </div>
