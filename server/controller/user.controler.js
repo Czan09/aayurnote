@@ -1,4 +1,5 @@
 const userService = require("../services/user.services");
+// const generateToken = require("../middleware/generateToken");
 
 const getAllUser = async (req, res) => {
   const result = await userService.getAllUser();
@@ -38,10 +39,11 @@ const getUserByID = async (req, res) => {
 
 const getUserByEmail = async (req, res) => {
   const { email } = req.body;
-  console.log(email + "+");
+
   // if (req.user.role.includes("admin")) {
   try {
     const user = await userService.getUserByEmail(email);
+
     return res.status(200).json(user);
   } catch (error) {
     console.log(error);
