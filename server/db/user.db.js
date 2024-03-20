@@ -15,7 +15,7 @@ const getUserByIdDb = async (id) => {
 const getUserByEmail = async (email) => {
   console.log(email);
   const { rows: users } = await pool.query(
-    `SELECT email,password,role FROM users WHERE email='${email}'`
+    `SELECT * FROM users WHERE email='${email}'`
   );
   return users;
 };

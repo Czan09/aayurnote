@@ -9,11 +9,14 @@ const {
   changeUserPassword,
 } = require("../controller/user.controler");
 
-const router = require("express").Router();
-// const verifyAdmin = require("../middleware/verifyAdmin");
-// const verifyToken = require("../middleware/verifyToken");
+const genToken = require("../middleware/genToken");
+const verifyToken = require("../middleware/verifyToken");
 
-// router.use(verifyToken);
+const hashPassword = require("../middleware/hashPassword.js");
+const comparePassword = require("../middleware/comparePassword");
+
+const router = require("express").Router();
+
 router.route("/user").get(getAllUser).post(createUser);
 router
   .route("/user/:id")
@@ -23,4 +26,9 @@ router
 router.route("/user/detail/:id").get(getDetailbyId);
 router.route("/user/email").post(getUserByEmail);
 router.route("/user/pass/:id").put(changeUserPassword);
+router.route("/user/genToken").post(genToken);
+router.route("/user/verifyToken").post(verifyToken);
+router.route("/user/hash").post(hashPassword);
+router.route("/user/compare").post(comparePassword);
+
 module.exports = router;

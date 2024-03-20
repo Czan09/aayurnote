@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/loginpage.css";
+import Cookies from "universal-cookie";
+
 import axios from "axios";
 
 function LoginPage() {
+  const cookies = new Cookies();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,15 +20,29 @@ function LoginPage() {
         return;
       }
       const getUser = await axios.post("/api/user/email", { email: email });
+      console.log(getUser);
       if (getUser.data.length === 0) {
         console.log("User Not Found");
         setError("Email or Password is incorrect");
       }
-      if (
-        email === getUser.data[0].email &&
-        password === getUser.data[0].password
-      ) {
-        console.log("enter");
+      const user = getUser.data[0]; // Assuming you're expecting a single user
+      // console.log(user);
+
+      const checkPassResponse = await axios.post("/api/user/compare", {
+        password: password,
+        checkPassword: user.password,
+      });
+      const isPasswordCorrect = checkPassResponse.data;
+      console.log(user);
+      if (email === getUser.data[0].email && isPasswordCorrect) {
+        const tokenResponse = await axios.post("/api/user/genToken", {
+          userId: user.id,
+          role: user.role,
+        });
+        console.log(tokenResponse);
+        cookies.set("token", tokenResponse.data, { path: "/" }); // Ensure you set the correct path
+
+        // console.log("enter");
         setError("");
         navigate("/");
       } else {

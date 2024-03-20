@@ -11,11 +11,6 @@ function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const postData = {
-    username: username,
-    email: email,
-    password: password,
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -27,13 +22,26 @@ function Register() {
 
       const checkEmail = await axios.post("/api/user/email", { email: email });
       console.log(checkEmail);
+
       if (checkEmail.data.length !== 0) {
         console.log("User already exists");
         setError("User already exists");
         return;
       }
 
-      const response = await axios.post("/api/user", postData);
+      const hashResponse = await axios.post("/api/user/hash", {
+        password: password,
+      });
+
+      const hash = hashResponse.data;
+      console.log(hash);
+
+      const response = await axios.post("/api/user", {
+        username: username,
+        email: email,
+        password: hash,
+      });
+
       console.log("Response:", response.data);
 
       navigate("/login");
