@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import "../css/notepage.css";
 import axios from "axios";
-import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const NoteDetail = () => {
   const { id } = useParams();
   // console.log(id);
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -52,6 +53,7 @@ const NoteDetail = () => {
       content: content,
     });
     console.log(editNote);
+    navigate("/notes");
   };
 
   return (

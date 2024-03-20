@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/notepage.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
 function NewNote() {
   const cookie = new Cookies();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -48,7 +50,8 @@ function NewNote() {
       content: content,
       users: userId,
     });
-    console.log(createNote);
+    // console.log(createNote);
+    navigate("/notes");
   };
 
   return (

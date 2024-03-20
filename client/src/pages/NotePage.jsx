@@ -49,7 +49,6 @@ const NotePage = () => {
           <button className="new">NEW NOTE</button>
         </Link>
 
-        <br />
         <div>
           {notes.length > 0 ? ( // Check if notes array has elements
             notes.map((note) => <Card key={note.id} card={note} />)
