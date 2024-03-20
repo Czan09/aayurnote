@@ -1,28 +1,32 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-const card  ({ card }) => {
+import "../css/card.css";
+const Card = ({ card }) => {
+  const [id, setId] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [tag, setTag] = useState("");
 
-    const [id, setid] = useState('');
-    const [name, setName] = useState('');
-    const [detail, setDetail] = useState('');
-    const [tag, setTag] = useState('');
-    
-    
-    
+  useEffect(() => {
+    setTitle(card.title);
+    setContent(card.content);
+    setTag(card.tag_name);
+    setId(card.note_id);
+  }, [card]);
+
+  console.log(card);
 
   return (
-    <Link to={ + id}>
+    <Link className="cardLink" to={"/note/" + id}>
+      {console.log(id)}
       <div className="card">
-        <div className="">
-        </div>
-        <h3 className="">{name}</h3>
-        <span className="">{}</span>
-        <div className="">
-          <span className="">{}</span>
-        </div>
+        <div className=""></div>
+        <h3 className="">{title}</h3>
+        <span className="">{tag}</span>
+        <div className="">{content}</div>
       </div>
     </Link>
   );
 };
 
-export default card;
+export default Card;

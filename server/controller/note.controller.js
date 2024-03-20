@@ -11,6 +11,17 @@ const getAllNotes = async (req, res) => {
   }
 };
 
+const getAllNotesUserId = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const notes = await noteService.getAllNotesUserId(id);
+    res.json(notes);
+  } catch (error) {
+    console.error("Error fetching notes:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 // Get note by ID
 const getNoteById = async (req, res) => {
   const { id } = req.params;
@@ -40,8 +51,9 @@ const createNote = async (req, res) => {
 const updateNote = async (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
+  // console.log(id, title, content);
   try {
-    const updatedNote = await noteService.updateNote(id, { title, content });
+    const updatedNote = await noteService.updateNote(id, title, content);
     res.json(updatedNote);
   } catch (error) {
     console.error("Error updating note:", error);
@@ -80,5 +92,6 @@ module.exports = {
   createNote,
   updateNote,
   updateNoteTag,
+  getAllNotesUserId,
   deleteNote,
 };

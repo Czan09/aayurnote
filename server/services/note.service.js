@@ -1,6 +1,7 @@
 const {
   getAllNotesDb,
   getNoteByIdDb,
+  getAllNotesUserIdDb,
   createNoteDb,
   updateNoteByID,
   updateNoteTagByID,
@@ -12,6 +13,16 @@ const getAllNotes = async () => {
   try {
     console.log("reached service");
     const notes = await getAllNotesDb();
+    return notes;
+  } catch (error) {
+    throw new Error("Error fetching notes:", error);
+  }
+};
+
+const getAllNotesUserId = async (id) => {
+  try {
+    // console.log("reached service");
+    const notes = await getAllNotesUserIdDb(id);
     return notes;
   } catch (error) {
     throw new Error("Error fetching notes:", error);
@@ -42,9 +53,10 @@ const createNote = async ({ title, content, users }) => {
 };
 
 // Update note by ID
-const updateNote = async (id, { title, content }) => {
+const updateNote = async (id, title, content) => {
   try {
-    const updatedNote = await updateNoteByID({ id, title, content });
+    // console.log("service");
+    const updatedNote = await updateNoteByID(id, title, content);
     return updatedNote;
   } catch (error) {
     throw new Error("Error updating note:", error);
@@ -74,6 +86,7 @@ const deleteNote = async (id) => {
 module.exports = {
   getAllNotes,
   getNoteById,
+  getAllNotesUserId,
   createNote,
   updateNote,
   updateNoteTag,

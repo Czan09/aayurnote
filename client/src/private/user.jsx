@@ -1,6 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import Homepage from "../pages/homepage";
 import Profile from "../pages/profilepage";
+import NotePage from "../pages/NotePage";
+import NewNote from "../pages/NewNote";
+import NoteDetail from "../pages/NoteDetail";
 import NotFoundPage from "../pages/NotFoundPage";
 
 function User() {
@@ -8,7 +11,9 @@ function User() {
     <>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/notes" element={<NotFoundPage />} />
+        <Route path="/notes" element={<NotePage />} />
+        <Route path="/notes/new" element={<NewNote />} />
+        <Route path="/note/:id" element={<NoteDetail />} />
         <Route path="/tag" element={<NotFoundPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFoundPage />} />

@@ -4,11 +4,41 @@ const pool = require(`../utils/conn`);
 const getAllNotesDb = async () => {
   try {
     const query = `
-      SELECT note.id, note.title, note.content, users.username, tag.tag_name
-      FROM note
-       JOIN users ON note.user_id = users.id
-       JOIN note_tag ON note.id = note_tag.note_id
-       JOIN tag ON note_tag.tag_id = tag.id
+      SELECT
+    note.id AS note_id,
+    note.title,
+    note.content,
+    tags.tag_name,
+	users.username
+FROM
+    note
+JOIN
+    tags ON note.tag = tags.id
+JOIN
+    users ON note.users = users.id
+    `;
+    const { rows: notes } = await pool.query(query);
+    return notes;
+  } catch (error) {
+    console.error("Error fetching all notes:", error);
+    throw error;
+  }
+};
+
+const getAllNotesUserIdDb = async (id) => {
+  try {
+    const query = `
+      SELECT
+    note.id AS note_id,
+    note.title,
+    note.content,
+    tags.tag_name
+FROM
+    note
+JOIN
+    tags ON note.tag = tags.id
+WHERE
+    note.users = ${id};
     `;
     const { rows: notes } = await pool.query(query);
     return notes;
@@ -20,7 +50,18 @@ const getAllNotesDb = async () => {
 
 const getNoteByIdDb = async (id) => {
   const { rows: note } = await pool.query(
-    `SELECT title,content FROM note WHERE id = ${id}`
+    `SELECT
+    note.id,
+    note.title,
+    note.content,
+    note.tag,
+    tags.tag_name
+FROM
+    note
+JOIN
+    tags ON note.tag = tags.id
+WHERE
+    note.id =  ${id}`
   );
   return note;
 };
@@ -35,9 +76,9 @@ const createNoteDb = async ({ title, content, users }) => {
   return note[0];
 };
 
-const updateNoteByID = async ({ id, title, content }) => {
+const updateNoteByID = async (id, title, content) => {
   const { rows: note } = await pool.query(
-    `UPDATE note SET title='${title}', content='${content}'}' WHERE id =${id}`
+    `UPDATE note SET title='${title}', content='${content}' WHERE id =${id}`
   );
   return note[0];
 };
@@ -60,6 +101,7 @@ const deleteNoteByID = async (id) => {
 module.exports = {
   getAllNotesDb,
   getNoteByIdDb,
+  getAllNotesUserIdDb,
   createNoteDb,
   updateNoteByID,
   updateNoteTagByID,
