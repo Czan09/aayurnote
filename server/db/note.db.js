@@ -82,9 +82,11 @@ const updateNoteByID = async (id, title, content) => {
   return note[0];
 };
 
-const updateNoteTagByID = async ({ id, tag }) => {
+const updateNoteTagByID = async (id, tag) => {
+  console.log("db" + id + tag);
+
   const { rows: note } = await pool.query(
-    `UPDATE note SET tag='${tag}'}' WHERE id =${id}`
+    `UPDATE note SET tag=${tag} WHERE id =${id}`
   );
   return note[0];
 };

@@ -17,7 +17,7 @@ function User() {
         <Route path="/" element={<Homepage />} />
         <Route path="/notes" element={<NotePage />} />
         <Route path="/notes/new" element={<NewNote />} />
-        <Route path="/notes/tag" element={<ChangeTag />} />
+        <Route path="/notes/tag/:id" element={<ChangeTag />} />
         <Route path="/note/:id" element={<NoteDetail />} />
         <Route path="/tag" element={<TagPage />} />
         <Route path="/tag/new" element={<CreateTag />} />

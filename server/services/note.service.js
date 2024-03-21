@@ -65,9 +65,11 @@ const updateNote = async (id, title, content) => {
 };
 
 // Update note tag by ID
-const updateNoteTag = async (id, { tag }) => {
+const updateNoteTag = async (id, tag) => {
   try {
-    const updatedNote = await updateNoteTagByID({ id, tag });
+    console.log("service" + id + tag);
+
+    const updatedNote = await updateNoteTagByID(id, tag);
     return updatedNote;
   } catch (error) {
     throw new Error("Error updating note tag:", error);

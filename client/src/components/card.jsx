@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/card.css";
 import axios from "axios";
 const Card = ({ card }) => {
+  const navigate = useNavigate();
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -11,12 +12,14 @@ const Card = ({ card }) => {
   useEffect(() => {
     setTitle(card.title);
     setContent(card.content);
-    setTag(card.tag_name);
+    if (card.tag_name !== "no-tag") {
+      setTag(card.tag_name);
+    }
     setId(card.note_id);
   }, [card]);
 
   const addTag = () => {
-    console.log(id);
+    navigate("/notes/tag/" + id);
   };
   const DeleteNote = async () => {
     console.log(id);

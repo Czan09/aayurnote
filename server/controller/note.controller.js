@@ -64,12 +64,12 @@ const updateNote = async (req, res) => {
 const updateNoteTag = async (req, res) => {
   const { id } = req.params;
   const { tag } = req.body;
+  console.log("controller" + id + tag);
   try {
-    const updatedNote = await noteService.updateNoteTag(id, { tag });
+    const updatedNote = await noteService.updateNoteTag(id, tag);
     res.json(updatedNote);
   } catch (error) {
-    console.error("Error updating note tag:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.log("not Found");
   }
 };
 
