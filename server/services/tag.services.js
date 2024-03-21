@@ -1,6 +1,7 @@
 const {
   getAllTagsDb,
   getTagByIdDb,
+  getTagByUserIdDb,
   createTagDb,
   updateTagByID,
   deleteTagByID,
@@ -25,14 +26,26 @@ const getTagById = async (id) => {
     }
     return tag[0];
   } catch (error) {
+    console.log("Note Not Found");
+  }
+};
+
+const getTagByUserId = async (id) => {
+  try {
+    const tag = await getTagByUserIdDb(id);
+    if (tag.length === 0) {
+      throw new Error("Tag not found");
+    }
+    return tag;
+  } catch (error) {
     throw new Error("Error fetching tag by ID:", error);
   }
 };
 
 // Create a new tag
-const createTag = async (tagData) => {
+const createTag = async ({ tag_name, users }) => {
   try {
-    const newTag = await createTagDb(tagData);
+    const newTag = await createTagDb({ tag_name, users });
     return newTag;
   } catch (error) {
     throw new Error("Error creating tag:", error);
@@ -62,6 +75,7 @@ const deleteTag = async (id) => {
 module.exports = {
   getAllTags,
   getTagById,
+  getTagByUserId,
   createTag,
   updateTag,
   deleteTag,

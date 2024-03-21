@@ -19,6 +19,9 @@ const NoteDetail = () => {
     const getNote = async () => {
       try {
         const response = await axios.get("/api/notes/" + id);
+        if (response.data.length === 0) {
+          navigate("/*");
+        }
         console.log(response.data);
         setTitle(response.data.title);
         setContent(response.data.content);

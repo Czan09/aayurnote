@@ -18,6 +18,17 @@ const getTagById = async (req, res) => {
     const tag = await tagService.getTagById(id);
     res.json(tag);
   } catch (error) {
+    console.log("Note Not Found");
+  }
+};
+
+const getTagByUserId = async (req, res) => {
+  const { id } = req.body;
+  // console.log(id);
+  try {
+    const tag = await tagService.getTagByUserId(id);
+    res.json(tag);
+  } catch (error) {
     console.error("Error fetching tag by ID:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -25,9 +36,9 @@ const getTagById = async (req, res) => {
 
 // Create a new tag
 const createTag = async (req, res) => {
-  const { tag_name } = req.body;
+  const { tag_name, users } = req.body;
   try {
-    const newTag = await tagService.createTag({ tag_name });
+    const newTag = await tagService.createTag({ tag_name, users });
     res.status(201).json(newTag);
   } catch (error) {
     console.error("Error creating tag:", error);
@@ -63,6 +74,7 @@ const deleteTag = async (req, res) => {
 module.exports = {
   getAllTags,
   getTagById,
+  getTagByUserId,
   createTag,
   updateTag,
   deleteTag,

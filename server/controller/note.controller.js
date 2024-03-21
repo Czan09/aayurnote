@@ -17,8 +17,7 @@ const getAllNotesUserId = async (req, res) => {
     const notes = await noteService.getAllNotesUserId(id);
     res.json(notes);
   } catch (error) {
-    console.error("Error fetching notes:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.log("Note Not Found");
   }
 };
 

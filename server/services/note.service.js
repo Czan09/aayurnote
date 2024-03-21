@@ -25,7 +25,8 @@ const getAllNotesUserId = async (id) => {
     const notes = await getAllNotesUserIdDb(id);
     return notes;
   } catch (error) {
-    throw new Error("Error fetching notes:", error);
+    console.log(error.message);
+    return;
   }
 };
 
@@ -38,7 +39,7 @@ const getNoteById = async (id) => {
     }
     return note[0];
   } catch (error) {
-    throw new Error("Error fetching note by ID:", error);
+    console.log("Not Found");
   }
 };
 

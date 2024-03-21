@@ -43,8 +43,7 @@ WHERE
     const { rows: notes } = await pool.query(query);
     return notes;
   } catch (error) {
-    console.error("Error fetching all notes:", error);
-    throw error;
+    console.log("tag not found");
   }
 };
 

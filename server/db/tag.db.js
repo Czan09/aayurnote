@@ -12,11 +12,18 @@ const getTagByIdDb = async (id) => {
   return tags;
 };
 
-const createTagDb = async ({ tag_name }) => {
+const getTagByUserIdDb = async (id) => {
+  const { rows: tags } = await pool.query(
+    `SELECT * FROM tags WHERE users = ${id}`
+  );
+  return tags;
+};
+
+const createTagDb = async ({ tag_name, users }) => {
   const { rows: tags } = await pool.query(
     `
-    INSERT INTO tags(tag_name) 
-    VALUES ('${tag_name}')
+    INSERT INTO tags(tag_name,users) 
+    VALUES ('${tag_name}',${users})
   returning tag_name`
   );
   return tags[0];
@@ -40,6 +47,7 @@ const deleteTagByID = async (id) => {
 module.exports = {
   getAllTagsDb,
   getTagByIdDb,
+  getTagByUserIdDb,
   createTagDb,
   updateTagByID,
   deleteTagByID,
