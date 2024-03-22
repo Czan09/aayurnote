@@ -36,9 +36,9 @@ const getTagByUserId = async (req, res) => {
 
 // Create a new tag
 const createTag = async (req, res) => {
-  const { tag_name, users } = req.body;
+  const { tag_name, users, color } = req.body;
   try {
-    const newTag = await tagService.createTag({ tag_name, users });
+    const newTag = await tagService.createTag({ tag_name, users, color });
     res.status(201).json(newTag);
   } catch (error) {
     console.error("Error creating tag:", error);
@@ -49,9 +49,9 @@ const createTag = async (req, res) => {
 // Update tag by ID
 const updateTag = async (req, res) => {
   const { id } = req.params;
-  const { tag_name } = req.body;
+  const { tag_name, color } = req.body;
   try {
-    const updatedTag = await tagService.updateTag(id, tag_name);
+    const updatedTag = await tagService.updateTag(id, tag_name, color);
     res.json(updatedTag);
   } catch (error) {
     console.error("Error updating tag:", error);

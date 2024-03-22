@@ -11,7 +11,8 @@ const NoteDetail = () => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [tagId, setTagId] = useState();
+  // const [tagId, setTagId] = useState();
+  const [color, setColor] = useState();
   const [tagName, setTagName] = useState("");
   const [error, setError] = useState("");
 
@@ -27,6 +28,9 @@ const NoteDetail = () => {
         setContent(response.data.content);
         if (response.data.tag === 1) {
           setTagName("");
+        } else {
+          setTagName(response.data.tag_name);
+          setColor(response.data.color);
         }
       } catch (error) {
         console.error("Error:", error);
@@ -67,15 +71,28 @@ const NoteDetail = () => {
         </span>
 
         <label htmlFor="title">Title</label>
+
         <input
           type="text"
           id="title"
           value={title}
           onChange={handleTitleChange}
         />
+        <div></div>
         <br />
         <label htmlFor="tag">Tag:</label>
-        {tagName}
+        <div style={{ display: "flex" }}>
+          <div
+            className="colorBox"
+            style={{
+              backgroundColor: color,
+              width: "50px",
+              height: "20px",
+              marginRight: "10px",
+            }}
+          ></div>
+          {tagName}
+        </div>
         <label htmlFor="content">Content</label>
         <textarea
           className="content"

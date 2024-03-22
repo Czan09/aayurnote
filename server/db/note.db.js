@@ -9,6 +9,7 @@ const getAllNotesDb = async () => {
     note.title,
     note.content,
     tags.tag_name,
+    tags.color,
 	users.username
 FROM
     note
@@ -32,7 +33,9 @@ const getAllNotesUserIdDb = async (id) => {
     note.id AS note_id,
     note.title,
     note.content,
-    tags.tag_name
+    tags.tag_name,
+    tags.color
+    
 FROM
     note
 JOIN
@@ -54,7 +57,8 @@ const getNoteByIdDb = async (id) => {
     note.title,
     note.content,
     note.tag,
-    tags.tag_name
+    tags.tag_name,
+    tags.color
 FROM
     note
 JOIN

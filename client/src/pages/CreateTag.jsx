@@ -10,6 +10,7 @@ function CreateTag() {
 
   const [tag, setTag] = useState("");
   const [error, setError] = useState("");
+  const [color, setColor] = useState("");
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
@@ -32,6 +33,9 @@ function CreateTag() {
   const handleTagNameChange = (event) => {
     setTag(event.target.value);
   };
+  const handleColorChange = (event) => {
+    setColor(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,9 +44,11 @@ function CreateTag() {
       setError("Fill Up everything");
       return;
     }
+    console.log(color);
     const createTag = await axios.post("/api/tags", {
       tag_name: tag,
       users: userId,
+      color: color,
     });
     console.log(createTag);
     navigate("/tag");
@@ -54,6 +60,14 @@ function CreateTag() {
         <span className="error">
           {error && <p className="error">{error}</p>}
         </span>
+        <label htmlFor="color"></label>
+        <input
+          className="color"
+          type="color"
+          id="color"
+          value={color}
+          onChange={handleColorChange}
+        />
         <label htmlFor="tag">Tag Name</label>
         <input
           type="text"

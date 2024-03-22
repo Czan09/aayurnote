@@ -43,9 +43,9 @@ const getTagByUserId = async (id) => {
 };
 
 // Create a new tag
-const createTag = async ({ tag_name, users }) => {
+const createTag = async ({ tag_name, users, color }) => {
   try {
-    const newTag = await createTagDb({ tag_name, users });
+    const newTag = await createTagDb({ tag_name, users, color });
     return newTag;
   } catch (error) {
     throw new Error("Error creating tag:", error);
@@ -53,9 +53,9 @@ const createTag = async ({ tag_name, users }) => {
 };
 
 // Update tag by ID
-const updateTag = async (id, tag_name) => {
+const updateTag = async (id, tag_name, color) => {
   try {
-    const updatedTag = await updateTagByID({ id, tag_name });
+    const updatedTag = await updateTagByID({ id, tag_name, color });
     return updatedTag;
   } catch (error) {
     throw new Error("Error updating tag:", error);

@@ -6,31 +6,34 @@ import axios from "axios";
 function EditTag() {
   const navigate = useNavigate();
   const { id } = useParams();
-
   const [tag, setTag] = useState("");
+  const [color, setColor] = useState("#fff");
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // console.log(id);
         const response = await axios.get("/api/tags/" + id);
-        // console.log(response);
         if (response.data.length === 0) {
-          // console.log("error");
-          navigate("/*");
+          navigate("/tag");
+          return;
         }
         setTag(response.data.tag_name);
+        setColor(response.data.color);
       } catch (error) {
         console.error("Error fetching tag:", error);
       }
     };
 
     fetchData();
-  }, [id]);
+  }, [id, navigate]);
 
   const handleTagNameChange = (event) => {
     setTag(event.target.value);
+  };
+
+  const handleColorChange = (event) => {
+    setColor(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -43,6 +46,7 @@ function EditTag() {
     try {
       const editTag = await axios.put("/api/tags/" + id, {
         tag_name: tag,
+        color: color, // Include color in the request body
       });
       console.log(editTag);
       navigate("/tag");
@@ -57,6 +61,14 @@ function EditTag() {
         <span className="error">
           {error && <p className="error">{error}</p>}
         </span>
+        <label htmlFor="color">Color</label>
+        <input
+          className="color"
+          type="color"
+          id="color"
+          value={color}
+          onChange={handleColorChange}
+        />
         <label htmlFor="tag">Tag Name</label>
         <input
           type="text"

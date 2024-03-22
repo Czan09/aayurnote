@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/card.css";
 import axios from "axios";
+
 const Card = ({ card }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
+  const [color, setColor] = useState("");
   const [content, setContent] = useState("");
   const [tag, setTag] = useState("");
 
@@ -16,11 +18,15 @@ const Card = ({ card }) => {
       setTag(card.tag_name);
     }
     setId(card.note_id);
+    setColor(card.color); // Set color from card prop
   }, [card]);
 
   const addTag = () => {
     navigate("/notes/tag/" + id);
   };
+
+  console.log(color);
+
   const DeleteNote = async () => {
     console.log(id);
     try {
@@ -32,25 +38,28 @@ const Card = ({ card }) => {
     }
   };
 
-  console.log(card);
-
   return (
     <>
-      {/* {console.log(id)} */}
-      <div className="card">
+      <div className="card" key={id}>
         <table>
           <tr>
             <th className="colmn1">
               <Link className="cardLink" to={"/note/" + id}>
                 <div>
-                  <div className=""></div>
+                  <div
+                    className="colorBox"
+                    style={{
+                      backgroundColor: color,
+                      width: "100%",
+                      height: "20px",
+                    }}
+                  ></div>
                   <h3 className="">{title}</h3>
                   <span className="">{tag}</span>
                   <div className="">{content}</div>
                 </div>
               </Link>
             </th>
-
             <th className="colmn2">
               <div>
                 <span>

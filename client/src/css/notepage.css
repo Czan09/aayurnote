@@ -53,3 +53,9 @@
   color: #fff;
   font-weight: bold;
 }
+
+.color {
+  width: 30px;
+  margin: 0;
+  padding: 0;
+}

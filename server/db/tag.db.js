@@ -19,19 +19,19 @@ const getTagByUserIdDb = async (id) => {
   return tags;
 };
 
-const createTagDb = async ({ tag_name, users }) => {
+const createTagDb = async ({ tag_name, users, color }) => {
   const { rows: tags } = await pool.query(
     `
-    INSERT INTO tags(tag_name,users) 
-    VALUES ('${tag_name}',${users})
+    INSERT INTO tags(tag_name,users,color) 
+    VALUES ('${tag_name}',${users},'${color}')
   returning tag_name`
   );
   return tags[0];
 };
 
-const updateTagByID = async ({ id, tag_name }) => {
+const updateTagByID = async ({ id, tag_name, color }) => {
   const { rows: tags } = await pool.query(
-    `UPDATE tags SET tag_name='${tag_name}' WHERE id =${id}`
+    `UPDATE tags SET tag_name='${tag_name}', color='${color}' WHERE id =${id}`
   );
   return tags[0];
 };
