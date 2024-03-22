@@ -69,13 +69,10 @@ const getDetailbyId = async (req, res) => {
 const updateUserByID = async (req, res) => {
   const { id } = req.params;
   const { username, email } = req.body;
+  console.log(id, username, email);
   // if (req.user.role.includes("admin")) {
   try {
-    const user = await userService.updateUserByID({
-      id,
-      username,
-      email,
-    });
+    const user = await userService.updateUserByID(id, username, email);
 
     return res.status(200).json(user);
   } catch (error) {

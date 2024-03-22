@@ -52,9 +52,11 @@ class UserService {
       console.log(error);
     }
   };
-  updateUserByID = async (id) => {
+  updateUserByID = async (id, username, email) => {
     try {
-      const user = await updateUserByID(id);
+      console.log(id, username, email);
+
+      const user = await updateUserByID(id, username, email);
       console.log(user);
       return user;
     } catch (error) {

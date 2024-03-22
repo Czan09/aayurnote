@@ -23,7 +23,7 @@ const getUserByEmail = async (email) => {
 const getDetailbyId = async (id) => {
   // console.log("db " + id);
   const { rows: users } = await pool.query(
-    `SELECT  username,email,role FROM users WHERE id = ${id}`
+    `SELECT  * FROM users WHERE id = ${id}`
   );
   return users;
 };
@@ -38,7 +38,9 @@ const createUserDb = async ({ username, email, password }) => {
   return users[0];
 };
 
-const updateUserByID = async ({ id, username, email }) => {
+const updateUserByID = async (id, username, email) => {
+  console.log(id, username, email);
+
   const { rows: users } = await pool.query(
     `UPDATE users SET username='${username}',email='${email}' WHERE id =${id}`
   );

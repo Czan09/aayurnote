@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../css/profile.css";
 
@@ -45,15 +45,13 @@ function Profile() {
     };
 
     fetchData();
-  }, [userId]); // Add userId to the dependency array
+  }, [userId]);
 
   const logOut = (e) => {
     e.preventDefault();
     cookie.remove("token", { path: "/" });
     navigate("/");
   };
-
-  // console.log(userId);
 
   return (
     <div className="profile-container">
@@ -68,6 +66,12 @@ function Profile() {
             <strong>Email:</strong> {user.email}
           </div>
           <br />
+
+          <div className="centerme">
+            <Link className="link" to="/edit">
+              Edit/ChangePassword
+            </Link>
+          </div>
           <br />
           <br />
           <button onClick={logOut}>Sign Out</button>

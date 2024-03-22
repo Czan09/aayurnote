@@ -7,6 +7,7 @@ import CreateTag from "../pages/CreateTag";
 import NoteDetail from "../pages/NoteDetail";
 import EditTag from "../pages/EditTag";
 import TagPage from "../pages/TagPage";
+import EditUser from "../pages/EditUser";
 import NotFoundPage from "../pages/NotFoundPage";
 import ChangeTag from "../pages/ChangeTag";
 
@@ -23,6 +24,7 @@ function User() {
         <Route path="/tag/new" element={<CreateTag />} />
         <Route path="/tag/:id" element={<EditTag />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/edit" element={<EditUser />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
