@@ -38,6 +38,16 @@ const createUserDb = async ({ username, email, password }) => {
   return users[0];
 };
 
+const createUserWithRoleDb = async ({ username, email, password, role }) => {
+  const { rows: users } = await pool.query(
+    `
+    INSERT INTO users(username,email,password,role) 
+    VALUES ('${username}','${email}','${password}','${role}')
+  returning username,email,password`
+  );
+  return users[0];
+};
+
 const updateUserByID = async (id, username, email) => {
   console.log(id, username, email);
 
@@ -68,6 +78,7 @@ module.exports = {
   getUserByEmail,
   getDetailbyId,
   createUserDb,
+  createUserWithRoleDb,
   updateUserByID,
   deleteUserByID,
   changeUserPasswordDB,

@@ -3,6 +3,7 @@ const {
   createUser,
   getUserByID,
   getUserByEmail,
+  createUserWithRole,
   getDetailbyId,
   updateUserByID,
   deleteUserByID,
@@ -25,6 +26,7 @@ router
   .delete(deleteUserByID);
 router.route("/user/detail/:id").get(getDetailbyId);
 router.route("/user/email").post(getUserByEmail);
+router.route("/user/create").post(createUserWithRole);
 router.route("/user/pass/:id").put(changeUserPassword);
 router.route("/user/genToken").post(genToken);
 router.route("/user/verifyToken").post(verifyToken);

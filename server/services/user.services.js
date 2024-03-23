@@ -3,6 +3,7 @@ const {
   getUserByIdDb,
   getUserByEmail,
   getDetailbyId,
+  createUserWithRoleDb,
   createUserDb,
   updateUserByID,
   deleteUserByID,
@@ -20,6 +21,18 @@ class UserService {
   createUser = async (user) => {
     try {
       return await createUserDb(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  createUserWithRole = async ({ username, email, password, role }) => {
+    try {
+      return await createUserWithRoleDb({
+        username,
+        email,
+        password,
+        role,
+      });
     } catch (error) {
       console.log(error);
     }

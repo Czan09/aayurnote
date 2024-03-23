@@ -23,6 +23,24 @@ const createUser = async (req, res) => {
   // throw new ErrorHandler(error.statusCode, "create error");
   // }
 };
+const createUserWithRole = async (req, res) => {
+  const { username, email, password, role } = req.body;
+  console.log(req.body);
+  // try {
+  const user = await userService.createUserWithRole({
+    username,
+    email,
+    password,
+    role,
+  });
+  res.status(201).json({
+    status: "success",
+    user,
+  });
+  // } catch (error) {
+  // throw new ErrorHandler(error.statusCode, "create error");
+  // }
+};
 
 const getUserByID = async (req, res) => {
   const { id } = req.params;
@@ -117,6 +135,7 @@ const deleteUserByID = async (req, res) => {
 module.exports = {
   getAllUser,
   createUser,
+  createUserWithRole,
   getUserByID,
   getUserByEmail,
   getDetailbyId,
