@@ -6,6 +6,7 @@ const {
   createUserWithRoleDb,
   createUserDb,
   updateUserByID,
+  updateUserActiveID,
   deleteUserByID,
   changeUserPasswordDB,
 } = require("../db/user.db.js");
@@ -70,6 +71,16 @@ class UserService {
       console.log(id, username, email);
 
       const user = await updateUserByID(id, username, email);
+      console.log(user);
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  updateUserActiveID = async ({ id, active }) => {
+    try {
+      const user = await updateUserActiveID({ id, active });
       console.log(user);
       return user;
     } catch (error) {

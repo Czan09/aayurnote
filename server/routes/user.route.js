@@ -6,6 +6,7 @@ const {
   createUserWithRole,
   getDetailbyId,
   updateUserByID,
+  updateUserActiveID,
   deleteUserByID,
   changeUserPassword,
 } = require("../controller/user.controler");
@@ -31,6 +32,7 @@ router.route("/user/pass/:id").put(changeUserPassword);
 router.route("/user/genToken").post(genToken);
 router.route("/user/verifyToken").post(verifyToken);
 router.route("/user/hash").post(hashPassword);
+router.route("/user/active/:id").put(updateUserActiveID);
 router.route("/user/compare").post(comparePassword);
 
 module.exports = router;

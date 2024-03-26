@@ -1,22 +1,29 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ListUserRow from "../components/listUserRow";
 
 const ListUser = () => {
   const [users, setUsers] = useState([]);
 
   const fetchData = async () => {
-    const response = await axios.get("/api/user");
-    setUsers(response.data);
+    try {
+      const response = await axios.get("/api/user");
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
-
   useEffect(() => {
     fetchData();
-  }, []);
+  });
+  useEffect(() => {
+    const fetchInterval = setInterval(() => {
+      fetchData();
+    }, 1000);
 
-  const deleteUser = async (id) => {
-    await axios.delete("/api/user/" + id);
-    fetchData();
-  };
+    // Clean up the interval to prevent memory leaks
+    return () => clearInterval(fetchInterval);
+  }, []);
 
   return (
     <div>
@@ -33,15 +40,7 @@ const ListUser = () => {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={user.id}>
-              <td>{index + 1}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>
-                <button onClick={() => deleteUser(user.id)}>DELETE</button>
-              </td>
-            </tr>
+            <ListUserRow key={user.id} user={user} index={index} />
           ))}
         </tbody>
       </table>

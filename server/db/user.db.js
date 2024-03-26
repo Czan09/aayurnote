@@ -57,6 +57,15 @@ const updateUserByID = async (id, username, email) => {
   return users[0];
 };
 
+const updateUserActiveID = async ({ id, active }) => {
+  // console.log(id, username, email);
+  console.log("db" + active);
+  const { rows: users } = await pool.query(
+    `UPDATE users SET active='${active}' WHERE id =${id}`
+  );
+  return users[0];
+};
+
 const changeUserPasswordDB = async ({ id, password }) => {
   console.log(id, password);
   return await pool.query(
@@ -80,6 +89,7 @@ module.exports = {
   createUserDb,
   createUserWithRoleDb,
   updateUserByID,
+  updateUserActiveID,
   deleteUserByID,
   changeUserPasswordDB,
 };

@@ -20,21 +20,24 @@ function LoginPage() {
         return;
       }
       const getUser = await axios.post("/api/user/email", { email: email });
-      console.log(getUser);
+      // console.log(getUser);
       if (getUser.data.length === 0) {
         console.log("User Not Found");
         setError("Email or Password is incorrect");
+        return;
       }
-      const user = getUser.data[0]; // Assuming you're expecting a single user
-      // console.log(user);
-
+      const user = getUser.data[0];
       const checkPassResponse = await axios.post("/api/user/compare", {
         password: password,
         checkPassword: user.password,
       });
       const isPasswordCorrect = checkPassResponse.data;
       console.log(user);
-      if (email === getUser.data[0].email && isPasswordCorrect) {
+      if (
+        email === getUser.data[0].email &&
+        isPasswordCorrect &&
+        getUser.data[0].active
+      ) {
         const tokenResponse = await axios.post("/api/user/genToken", {
           userId: user.id,
           role: user.role,
@@ -46,7 +49,7 @@ function LoginPage() {
         setError("");
         navigate("/");
       } else {
-        setError("Email or Password is incorrect");
+        setError("Email or Password is incorrect or Account is InActive");
         throw new Error("Email or Password is incorrect");
       }
     } catch (error) {

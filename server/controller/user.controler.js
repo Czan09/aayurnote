@@ -99,6 +99,21 @@ const updateUserByID = async (req, res) => {
   // }
   // throw new ErrorHandler(401, "Unauthorized");
 };
+const updateUserActiveID = async (req, res) => {
+  const { id } = req.params;
+  const { active } = req.body;
+  console.log("test " + id + " c " + active);
+  // if (req.user.role.includes("admin")) {
+  try {
+    const user = await userService.updateUserActiveID({ id, active });
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+  }
+  // }
+  // throw new ErrorHandler(401, "Unauthorized");
+};
 
 const changeUserPassword = async (req, res) => {
   const { id } = req.params;
@@ -140,6 +155,7 @@ module.exports = {
   getUserByEmail,
   getDetailbyId,
   updateUserByID,
+  updateUserActiveID,
   deleteUserByID,
   changeUserPassword,
 };
