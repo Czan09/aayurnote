@@ -55,7 +55,7 @@ function App() {
     </>
   ) : user === Role.User ? (
     <>
-      <Navbar1 />
+      <Navbar1/>
       <User />
     </>
   ) : user === Role.Admin ? (
