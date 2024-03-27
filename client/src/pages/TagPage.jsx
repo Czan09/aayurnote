@@ -47,7 +47,7 @@ const NotePage = () => {
     <>
       <div>
         <Link to={"new"}>
-          <button className="new">NEW NOTE</button>
+          <button className="new">NEW TAG</button>
         </Link>
 
         <div>

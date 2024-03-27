@@ -9,6 +9,7 @@ const Card = ({ card }) => {
   const [title, setTitle] = useState("");
   const [color, setColor] = useState("");
   const [content, setContent] = useState("");
+  const [date, setDate] = useState("");
   const [tag, setTag] = useState("");
 
   useEffect(() => {
@@ -18,7 +19,8 @@ const Card = ({ card }) => {
       setTag(card.tag_name);
     }
     setId(card.note_id);
-    setColor(card.color); // Set color from card prop
+    setColor(card.color);
+    setDate(card.date);
   }, [card]);
 
   const addTag = () => {
@@ -72,6 +74,7 @@ const Card = ({ card }) => {
                     DELETE
                   </button>
                 </span>
+                <span>{date}</span>
               </div>
             </th>
           </tr>
