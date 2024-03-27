@@ -20,7 +20,10 @@ const Card = ({ card }) => {
     }
     setId(card.note_id);
     setColor(card.color);
-    setDate(card.date);
+    const str = card.created_at;
+    const result = str.split("T")[0];
+    console.log(result);
+    setDate(result);
   }, [card]);
 
   const addTag = () => {

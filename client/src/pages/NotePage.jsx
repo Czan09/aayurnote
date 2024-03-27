@@ -41,6 +41,7 @@ const NotePage = () => {
 
     fetchNotes();
   }, [userId]);
+  console.log(notes);
 
   return (
     <>

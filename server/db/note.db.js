@@ -33,6 +33,7 @@ const getAllNotesUserIdDb = async (id) => {
     note.id AS note_id,
     note.title,
     note.content,
+    note.created_at,
     tags.tag_name,
     tags.color
     

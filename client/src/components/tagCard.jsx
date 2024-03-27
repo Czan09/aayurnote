@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../css/card.css";
 import axios from "axios";
 const TagCard = ({ card }) => {
+  const navigate = useNavigate();
   const [id, setId] = useState("");
   const [color, setColor] = useState();
   const [tag, setTag] = useState("");
@@ -12,6 +13,11 @@ const TagCard = ({ card }) => {
     setId(card.id);
     setColor(card.color);
   }, [card]);
+
+  const editTag = () => {
+    console.log(id);
+    navigate("/tag/" + id);
+  };
 
   const deleteTag = async () => {
     console.log(id);
@@ -32,19 +38,17 @@ const TagCard = ({ card }) => {
         <table>
           <tr>
             <th className="colmn1">
-              <Link className="cardLink" to={"/tag/" + id}>
-                <div>
-                  <div
-                    className="colorBox"
-                    style={{
-                      backgroundColor: color,
-                      width: "50%",
-                      height: "20px",
-                    }}
-                  ></div>
-                  <span className="">{tag}</span>
-                </div>
-              </Link>
+              <div>
+                <div
+                  className="colorBox"
+                  style={{
+                    backgroundColor: color,
+                    width: "50%",
+                    height: "20px",
+                  }}
+                ></div>
+                <span className="">{tag}</span>
+              </div>
             </th>
 
             <th className="colmn2">
@@ -52,6 +56,11 @@ const TagCard = ({ card }) => {
                 <span>
                   <button className="button2" onClick={deleteTag}>
                     DELETE
+                  </button>
+                </span>
+                <span>
+                  <button className="button1" onClick={editTag}>
+                    Edit
                   </button>
                 </span>
               </div>
