@@ -1,14 +1,15 @@
-import axios from "axios";
-import Cookies from "universal-cookie";
 import { useEffect, useState } from "react";
-import "../css/notepage.css";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import Card from "../components/card";
+import Cookies from "universal-cookie";
 
 const NotePage = () => {
-  const cookie = new Cookies();
   const [userId, setUserId] = useState(null);
   const [notes, setNotes] = useState([]);
+  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState([]);
+  const cookie = new Cookies();
 
   useEffect(() => {
     const verifyUser = async () => {
@@ -26,7 +27,24 @@ const NotePage = () => {
     };
 
     verifyUser();
-  }, [cookie]);
+  }, []);
+
+  useEffect(() => {
+    const getTags = async () => {
+      try {
+        const response = await axios.post("/api/tags/user", {
+          id: userId,
+        });
+        setTags(response.data);
+      } catch (error) {
+        console.error("Error getting tags:", error);
+      }
+    };
+
+    if (userId) {
+      getTags();
+    }
+  }, [userId]);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -39,20 +57,39 @@ const NotePage = () => {
       }
     };
 
-    fetchNotes();
+    if (userId) {
+      fetchNotes();
+    }
   }, [userId]);
-  console.log(notes);
+
+  const handleTagChange = (event) => {
+    setTag(event.target.value);
+  };
+
+  console.log(tag);
 
   return (
     <>
+      <div>
+        <label htmlFor="tag">Filter</label>
+        <select id="tag" value={tag} onChange={handleTagChange}>
+          <option value={0}>Select a tag</option>
+          <option value={1}>no tag</option>
+          {tags.map((tagItem) => (
+            <option key={tagItem.id} value={tagItem.id}>
+              {tagItem.tag_name}
+            </option>
+          ))}
+        </select>
+      </div>
       <div>
         <Link to={"new"}>
           <button className="new">NEW NOTE</button>
         </Link>
 
         <div>
-          {notes.length > 0 ? ( // Check if notes array has elements
-            notes.map((note) => <Card key={note.id} card={note} />)
+          {notes.length > 0 ? (
+            notes.map((note) => <Card key={note.id} card={note} filter={tag} />)
           ) : (
             <div className="back">
               <h3 className="No-data">NO NOTES FOUND</h3>

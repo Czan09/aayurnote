@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../css/card.css";
 import axios from "axios";
 
-const Card = ({ card }) => {
+const Card = ({ card, filter }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
@@ -11,6 +11,9 @@ const Card = ({ card }) => {
   const [content, setContent] = useState("");
   const [date, setDate] = useState("");
   const [tag, setTag] = useState("");
+
+  console.log(card);
+  console.log("filter" + filter);
 
   useEffect(() => {
     setTitle(card.title);
@@ -22,7 +25,6 @@ const Card = ({ card }) => {
     setColor(card.color);
     const str = card.created_at;
     const result = str.split("T")[0];
-    console.log(result);
     setDate(result);
   }, [card]);
 
@@ -30,10 +32,7 @@ const Card = ({ card }) => {
     navigate("/notes/tag/" + id);
   };
 
-  console.log(color);
-
   const DeleteNote = async () => {
-    console.log(id);
     try {
       const deleteNote = await axios.delete("/api/notes/" + id);
       console.log(deleteNote);
@@ -43,48 +42,99 @@ const Card = ({ card }) => {
     }
   };
 
-  return (
-    <>
-      <div className="card" key={id}>
-        <table>
-          <tr>
-            <th className="colmn1">
-              <Link className="cardLink" to={"/note/" + id}>
+  console.log(tag);
+
+  if (filter == 0) {
+    return (
+      <>
+        <div className="card" key={id}>
+          <table>
+            <tr>
+              <th className="colmn1">
+                <Link className="cardLink" to={"/note/" + id}>
+                  <div>
+                    <div
+                      className="colorBox"
+                      style={{
+                        backgroundColor: color,
+                        width: "100%",
+                        height: "20px",
+                      }}
+                    ></div>
+                    <h3 className="">{title}</h3>
+                    <span className="">{tag}</span>
+                    <div className="">{content}</div>
+                  </div>
+                </Link>
+              </th>
+              <th className="colmn2">
                 <div>
-                  <div
-                    className="colorBox"
-                    style={{
-                      backgroundColor: color,
-                      width: "100%",
-                      height: "20px",
-                    }}
-                  ></div>
-                  <h3 className="">{title}</h3>
-                  <span className="">{tag}</span>
-                  <div className="">{content}</div>
+                  <span>
+                    <button className="button1" onClick={addTag}>
+                      CHANGE TAG
+                    </button>
+                  </span>
+                  <span>
+                    <button className="button2" onClick={DeleteNote}>
+                      DELETE
+                    </button>
+                  </span>
+                  <span>{date}</span>
                 </div>
-              </Link>
-            </th>
-            <th className="colmn2">
-              <div>
-                <span>
-                  <button className="button1" onClick={addTag}>
-                    CHANGE TAG
-                  </button>
-                </span>
-                <span>
-                  <button className="button2" onClick={DeleteNote}>
-                    DELETE
-                  </button>
-                </span>
-                <span>{date}</span>
-              </div>
-            </th>
-          </tr>
-        </table>
-      </div>
-    </>
-  );
+              </th>
+            </tr>
+          </table>
+        </div>
+      </>
+    );
+  }
+
+  if (filter == card.tag) {
+    return (
+      <>
+        <div className="card" key={id}>
+          <table>
+            <tr>
+              <th className="colmn1">
+                <Link className="cardLink" to={"/note/" + id}>
+                  <div>
+                    <div
+                      className="colorBox"
+                      style={{
+                        backgroundColor: color,
+                        width: "100%",
+                        height: "20px",
+                      }}
+                    ></div>
+                    <h3 className="">{title}</h3>
+                    <span className="">{tag}</span>
+                    <div className="">{content}</div>
+                  </div>
+                </Link>
+              </th>
+              <th className="colmn2">
+                <div>
+                  <span>
+                    <button className="button1" onClick={addTag}>
+                      CHANGE TAG
+                    </button>
+                  </span>
+                  <span>
+                    <button className="button2" onClick={DeleteNote}>
+                      DELETE
+                    </button>
+                  </span>
+                  <span>{date}</span>
+                </div>
+              </th>
+            </tr>
+          </table>
+        </div>
+      </>
+    );
+  }
+
+  return null;
 };
 
 export default Card;
