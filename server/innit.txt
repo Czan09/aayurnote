@@ -1,4 +1,4 @@
-CREATE DATABASE note;
+CREATE DATABASE note;  
 
 CREATE TABLE IF NOT EXISTS public.users
 (

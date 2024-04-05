@@ -3,16 +3,18 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-
 const Homepage = () => {
-const cookie = new Cookies();
+  const cookie = new Cookies();
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null); // Initialize to null
-  useEffect(() => {
-  
-  const tokenData = cookie.get("token");
 
-  if (!tokenData) return;
+  if (user) {
+    var name = "";
+  }
+  useEffect(() => {
+    const tokenData = cookie.get("token");
+
+    if (!tokenData) return;
 
     const verifyToken = async () => {
       try {
@@ -36,6 +38,7 @@ const cookie = new Cookies();
         const response = await axios.get(`/api/user/detail/${userId}`); // Template literal for constructing URL
         console.log(response.data[0]);
         setUser(response.data[0]);
+        name = response.username;
       } catch (error) {
         console.error("Error fetching user:", error);
       }
@@ -44,10 +47,9 @@ const cookie = new Cookies();
     fetchData();
   }, [userId]);
 
-
   return (
     <div className="home-container">
-      <h2>Welcome {user.username} to Create-Note</h2>
+      <h2>Welcome {name} to Create-Note</h2>
       <p>A web server where you can digitally record your important datas</p>
       <p>Feel free to explore and enjoy your stay!</p>
     </div>

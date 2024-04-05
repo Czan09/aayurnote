@@ -1,16 +1,24 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
+import { Modal } from "@mui/material";
+import ConformDelete from "../components/ConformDelete";
 
 function ListUserRow({ user, index }) {
   const cookie = new Cookies();
   const [userId, setUserId] = useState(null); // Initialize to null
+  const [isOpen, setIsOpen] = useState(false);
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  const clickBtn = () => {
+    setIsOpen(true);
+  };
   useEffect(() => {
     const tokenData = cookie.get("token");
 
     if (!tokenData) return;
-
     const verifyToken = async () => {
       try {
         const response = await axios.post("/api/user/verifyToken", {
@@ -29,12 +37,6 @@ function ListUserRow({ user, index }) {
   const [active, setActive] = useState(user.active);
   const { email, id, role, username } = user;
 
-  const deleteUser = async (id) => {
-    console.log(id);
-    const response = await axios.delete("/api/user/" + id);
-    console.log(response);
-  };
-
   const saveUserAction = async () => {
     console.log(id + "+" + active);
     const response = await axios.put("/api/user/active/" + id, {
@@ -43,27 +45,33 @@ function ListUserRow({ user, index }) {
     console.log(response);
   };
 
-  return userId != id ? (
-    <tr key={id}>
-      <td>{index + 1}</td>
-      <td>{username}</td>
-      <td>{email}</td>
-      <td>{role}</td>
-      <td>
-        <input
-          type="checkbox"
-          checked={active}
-          onChange={(e) => {
-            setActive(e.target.checked); // Use e.target.checked for checkbox state
-            console.log(e.target.checked); // This will give you the correct checked state
-          }}
-        />
-      </td>
-      <td>
-        <button onClick={() => deleteUser(id)}>DELETE</button>
-        <button onClick={saveUserAction}>SAVE</button>{" "}
-      </td>
-    </tr>
+  return userId !== id ? (
+    <>
+      <tr key={id}>
+        <td>{index + 1}</td>
+        <td>{username}</td>
+        <td>{email}</td>
+        <td>{role}</td>
+        <td>
+          <input
+            type="checkbox"
+            checked={active}
+            onChange={(e) => {
+              setActive(e.target.checked); // Use e.target.checked for checkbox state
+              console.log(e.target.checked); // This will give you the correct checked state
+            }}
+          />
+        </td>
+        <td>
+          {role === "admin" && <button onClick={clickBtn}>DELETE</button>}
+          <button onClick={saveUserAction}>SAVE</button>{" "}
+        </td>
+      </tr>
+
+      <Modal open={isOpen} onClose={handleClose}>
+        <ConformDelete userId={id} />
+      </Modal>
+    </>
   ) : (
     ""
   );
