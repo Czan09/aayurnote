@@ -9,6 +9,7 @@ const NotePage = () => {
   const [notes, setNotes] = useState([]);
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
+  const [search, setSearch] = useState("");
   const cookie = new Cookies();
 
   useEffect(() => {
@@ -66,11 +67,22 @@ const NotePage = () => {
     setTag(event.target.value);
   };
 
-  console.log(tag);
+  // console.log(tag);
 
   return (
     <>
       <div>
+        <div>
+          <label htmlFor="search">Search Note</label>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </div>
+
         <label htmlFor="tag">Filter</label>
         <select id="tag" value={tag} onChange={handleTagChange}>
           <option value={0}>Select a tag</option>
@@ -89,7 +101,9 @@ const NotePage = () => {
 
         <div>
           {notes.length > 0 ? (
-            notes.map((note) => <Card key={note.id} card={note} filter={tag} />)
+            notes.map((note) => (
+              <Card key={note.id} card={note} filter={tag} search={search} />
+            ))
           ) : (
             <div className="back">
               <h3 className="No-data">NO NOTES FOUND</h3>

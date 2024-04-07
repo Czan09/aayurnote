@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../css/card.css";
 import axios from "axios";
 
-const Card = ({ card, filter }) => {
+const Card = ({ card, filter, search }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
@@ -42,9 +42,52 @@ const Card = ({ card, filter }) => {
     }
   };
 
-  console.log(tag);
+  console.log(search);
 
-  if (filter == 0) {
+  if (title.toLowerCase().includes(search.toLowerCase())) {
+    return (
+      <div className="card" key={id}>
+        <table>
+          <tr>
+            <th className="colmn1">
+              <Link className="cardLink" to={"/note/" + id}>
+                <div>
+                  <div
+                    className="colorBox"
+                    style={{
+                      backgroundColor: color,
+                      width: "100%",
+                      height: "20px",
+                    }}
+                  ></div>
+                  <h3 className="">{title}</h3>
+                  <span className="">{tag}</span>
+                  <div className="">{content}</div>
+                </div>
+              </Link>
+            </th>
+            <th className="colmn2">
+              <div>
+                <span>
+                  <button className="button1" onClick={addTag}>
+                    CHANGE TAG
+                  </button>
+                </span>
+                <span>
+                  <button className="button2" onClick={DeleteNote}>
+                    DELETE
+                  </button>
+                </span>
+                <span>{date}</span>
+              </div>
+            </th>
+          </tr>
+        </table>
+      </div>
+    );
+  }
+
+  if (filter == 0 && search == "") {
     return (
       <>
         <div className="card" key={id}>
@@ -89,7 +132,7 @@ const Card = ({ card, filter }) => {
     );
   }
 
-  if (filter == card.tag) {
+  if (filter == card.tag && search == "") {
     return (
       <>
         <div className="card" key={id}>
