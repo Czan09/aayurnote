@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "../css/resister.css";
 
-function CreateUser() {
+function CreateUserSuper() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -78,7 +78,8 @@ function CreateUser() {
           >
             <option value="">SELECT</option>
             <option value="normal">Normal</option>
-            {/* <option value="admin">Admin</option> */}
+            <option value="admin">Admin</option>
+            <option value="super">Super Admin</option>
           </select>
         </div>
         <div className="form-group">
@@ -100,4 +101,4 @@ function CreateUser() {
   );
 }
 
-export default CreateUser;
+export default CreateUserSuper;

@@ -1,21 +1,20 @@
-// import Role from "../private/role";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
-// import { Modal } from "@mui/material";
-// import ConformDelete from "../components/ConformDelete";
+import { Modal } from "@mui/material";
+import ConformDelete from "./ConformDelete";
 
-function ListUserRow({ user, index }) {
+function ListUserRowSuper({ user, index }) {
   const cookie = new Cookies();
   const [userId, setUserId] = useState(null); // Initialize to null
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  // const handleClose = () => {
-  //   setIsOpen(false);
-  // };
-  // const clickBtn = () => {
-  //   setIsOpen(true);
-  // };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  const clickBtn = () => {
+    setIsOpen(true);
+  };
   useEffect(() => {
     const tokenData = cookie.get("token");
 
@@ -45,9 +44,8 @@ function ListUserRow({ user, index }) {
     });
     console.log(response);
   };
-  // console.log(role);
 
-  return userId !== id && role !== "super" ? (
+  return userId !== id ? (
     <>
       <tr key={id}>
         <td>{index + 1}</td>
@@ -65,14 +63,18 @@ function ListUserRow({ user, index }) {
           />
         </td>
         <td>
-          {/* {role === "admin" && <button onClick={clickBtn}>DELETE</button>} */}
+          {role === "admin" && <button onClick={clickBtn}>DELETE</button>}
           <button onClick={saveUserAction}>SAVE</button>{" "}
         </td>
       </tr>
+
+      <Modal open={isOpen} onClose={handleClose}>
+        <ConformDelete userId={id} />
+      </Modal>
     </>
   ) : (
     ""
   );
 }
 
-export default ListUserRow;
+export default ListUserRowSuper;

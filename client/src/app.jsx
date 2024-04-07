@@ -9,6 +9,7 @@ import Navbar2 from "./components/navbar-admin";
 
 import Public from "./private/Public";
 import Admin from "./private/admin";
+import SuperAdmin from "./private/SuperAdmin";
 import User from "./private/user";
 import NotFoundPage from "./pages/NotFoundPage";
 function App() {
@@ -55,13 +56,18 @@ function App() {
     </>
   ) : user === Role.User ? (
     <>
-      <Navbar1/>
+      <Navbar1 />
       <User />
     </>
   ) : user === Role.Admin ? (
     <>
       <Navbar2 />
       <Admin />
+    </>
+  ) : user === Role.Super ? (
+    <>
+      <Navbar2 />
+      <SuperAdmin />
     </>
   ) : (
     <NotFoundPage />
