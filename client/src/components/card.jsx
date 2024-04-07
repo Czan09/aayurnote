@@ -42,7 +42,7 @@ const Card = ({ card, filter, search }) => {
     }
   };
 
-  console.log(search);
+  console.log(title.toLowerCase().includes(search.toLowerCase()));
 
   if (title.toLowerCase().includes(search.toLowerCase())) {
     return (
