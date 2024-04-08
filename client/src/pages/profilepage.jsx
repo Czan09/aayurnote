@@ -50,6 +50,7 @@ function Profile() {
   const logOut = (e) => {
     e.preventDefault();
     cookie.remove("token", { path: "/" });
+    localStorage.removeItem("remindTriggered");
     navigate("/");
   };
 

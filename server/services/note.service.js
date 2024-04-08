@@ -54,10 +54,10 @@ const createNote = async ({ title, content, users }) => {
 };
 
 // Update note by ID
-const updateNote = async (id, title, content) => {
+const updateNote = async (id, title, content,remind) => {
   try {
     // console.log("service");
-    const updatedNote = await updateNoteByID(id, title, content);
+    const updatedNote = await updateNoteByID(id, title, content,remind);
     return updatedNote;
   } catch (error) {
     throw new Error("Error updating note:", error);

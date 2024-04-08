@@ -6,13 +6,12 @@ import { useParams } from "react-router-dom";
 
 const NoteDetail = () => {
   const { id } = useParams();
-  // console.log(id);
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  // const [tagId, setTagId] = useState();
   const [color, setColor] = useState();
+  const [remind, setRemind] = useState(false); // Default to false
   const [tagName, setTagName] = useState("");
   const [error, setError] = useState("");
 
@@ -23,7 +22,6 @@ const NoteDetail = () => {
         if (response.data.length === 0) {
           navigate("/*");
         }
-        console.log(response.data);
         setTitle(response.data.title);
         setContent(response.data.content);
         if (response.data.tag === 1) {
@@ -32,13 +30,15 @@ const NoteDetail = () => {
           setTagName(response.data.tag_name);
           setColor(response.data.color);
         }
+        // Set the remind checkbox based on the fetched data
+        setRemind(response.data.remind);
       } catch (error) {
         console.error("Error:", error);
       }
     };
 
     getNote();
-  }, [id]);
+  }, [id, navigate]);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -58,6 +58,7 @@ const NoteDetail = () => {
     const editNote = await axios.put("/api/notes/" + id, {
       title: title,
       content: content,
+      remind: remind,
     });
     console.log(editNote);
     navigate("/notes");
@@ -71,14 +72,12 @@ const NoteDetail = () => {
         </span>
 
         <label htmlFor="title">Title</label>
-
         <input
           type="text"
           id="title"
           value={title}
           onChange={handleTitleChange}
         />
-        <div></div>
         <br />
         <label htmlFor="tag">Tag:</label>
         <div style={{ display: "flex" }}>
@@ -92,6 +91,19 @@ const NoteDetail = () => {
             }}
           ></div>
           {tagName}
+        </div>
+        <div>
+          Remind Me
+          <br />
+          <input
+            type="checkbox"
+            checked={remind}
+            name="remind"
+            id="remind"
+            onChange={(e) => {
+              setRemind(e.target.checked);
+            }}
+          />
         </div>
         <label htmlFor="content">Content</label>
         <textarea
@@ -107,4 +119,5 @@ const NoteDetail = () => {
     </>
   );
 };
+
 export default NoteDetail;

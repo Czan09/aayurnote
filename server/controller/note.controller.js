@@ -49,10 +49,10 @@ const createNote = async (req, res) => {
 // Update note by ID
 const updateNote = async (req, res) => {
   const { id } = req.params;
-  const { title, content } = req.body;
-  // console.log(id, title, content);
+  const { title, content ,remind} = req.body;
+  console.log(id, title, content,remind);
   try {
-    const updatedNote = await noteService.updateNote(id, title, content);
+    const updatedNote = await noteService.updateNote(id, title, content,remind);
     res.json(updatedNote);
   } catch (error) {
     console.error("Error updating note:", error);
@@ -63,7 +63,7 @@ const updateNote = async (req, res) => {
 // Update note tag by ID
 const updateNoteTag = async (req, res) => {
   const { id } = req.params;
-  const { tag } = req.body;
+  const { tag} = req.body;
   console.log("controller" + id + tag);
   try {
     const updatedNote = await noteService.updateNoteTag(id, tag);

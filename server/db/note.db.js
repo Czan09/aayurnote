@@ -35,6 +35,7 @@ const getAllNotesUserIdDb = async (id) => {
     note.content,
     note.created_at,
     note.tag,
+    note.remind,
     tags.tag_name,
     tags.color
     
@@ -59,6 +60,7 @@ const getNoteByIdDb = async (id) => {
     note.title,
     note.content,
     note.tag,
+    note.remind,
     tags.tag_name,
     tags.color
 FROM
@@ -81,9 +83,9 @@ const createNoteDb = async ({ title, content, users }) => {
   return note[0];
 };
 
-const updateNoteByID = async (id, title, content) => {
+const updateNoteByID = async (id, title, content,remind) => {
   const { rows: note } = await pool.query(
-    `UPDATE note SET title='${title}', content='${content}' WHERE id =${id}`
+    `UPDATE note SET title='${title}', content='${content}',remind=${remind} WHERE id =${id}`
   );
   return note[0];
 };

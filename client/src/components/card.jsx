@@ -12,9 +12,6 @@ const Card = ({ card, filter, search }) => {
   const [date, setDate] = useState("");
   const [tag, setTag] = useState("");
 
-  console.log(card);
-  console.log("filter" + filter);
-
   useEffect(() => {
     setTitle(card.title);
     setContent(card.content);
@@ -42,142 +39,69 @@ const Card = ({ card, filter, search }) => {
     }
   };
 
-  console.log(title.toLowerCase().includes(search.toLowerCase()));
+  const truncateContent = (content) => {
+    const maxWords = 10;
+    const words = content.split(/\s+/);
+    if (words.length > maxWords) {
+      return words.slice(0, maxWords).join(" ") + "   .....see more";
+    }
+    return content;
+  };
 
-  if (title.toLowerCase().includes(search.toLowerCase())) {
-    return (
-      <div className="card" key={id}>
-        <table>
-          <tr>
-            <th className="colmn1">
-              <Link className="cardLink" to={"/note/" + id}>
-                <div>
-                  <div
-                    className="colorBox"
-                    style={{
-                      backgroundColor: color,
-                      width: "100%",
-                      height: "20px",
-                    }}
-                  ></div>
-                  <h3 className="">{title}</h3>
-                  <span className="">{tag}</span>
-                  <div className="">{content}</div>
-                </div>
-              </Link>
-            </th>
-            <th className="colmn2">
+  const renderContent = () => {
+    if (filter == 0 && search == "") {
+      return renderCard();
+    }
+
+    if (filter == card.tag || (filter==0 && title.toLowerCase().includes(search.toLowerCase()))) {
+      return renderCard();
+    }
+
+    return null;
+  };
+
+  const renderCard = () => (
+    <div className="card" key={id}>
+      <table>
+        <tr>
+          <th className="colmn1">
+            <Link className="cardLink" to={"/note/" + id}>
               <div>
-                <span>
-                  <button className="button1" onClick={addTag}>
-                    CHANGE TAG
-                  </button>
-                </span>
-                <span>
-                  <button className="button2" onClick={DeleteNote}>
-                    DELETE
-                  </button>
-                </span>
-                <span>{date}</span>
+                <div
+                  className="colorBox"
+                  style={{
+                    backgroundColor: color,
+                    width: "100%",
+                    height: "20px",
+                  }}
+                ></div>
+                <h3>{title}</h3>
+                <span>{tag}</span>
+                <div>{truncateContent(content)}</div>
               </div>
-            </th>
-          </tr>
-        </table>
-      </div>
-    );
-  }
+            </Link>
+          </th>
+          <th className="colmn2">
+            <div>
+              <span>
+                <button className="button1" onClick={addTag}>
+                  CHANGE TAG
+                </button>
+              </span>
+              <span>
+                <button className="button2" onClick={DeleteNote}>
+                  DELETE
+                </button>
+              </span>
+              <span>{date}</span>
+            </div>
+          </th>
+        </tr>
+      </table>
+    </div>
+  );
 
-  if (filter == 0 && search == "") {
-    return (
-      <>
-        <div className="card" key={id}>
-          <table>
-            <tr>
-              <th className="colmn1">
-                <Link className="cardLink" to={"/note/" + id}>
-                  <div>
-                    <div
-                      className="colorBox"
-                      style={{
-                        backgroundColor: color,
-                        width: "100%",
-                        height: "20px",
-                      }}
-                    ></div>
-                    <h3 className="">{title}</h3>
-                    <span className="">{tag}</span>
-                    <div className="">{content}</div>
-                  </div>
-                </Link>
-              </th>
-              <th className="colmn2">
-                <div>
-                  <span>
-                    <button className="button1" onClick={addTag}>
-                      CHANGE TAG
-                    </button>
-                  </span>
-                  <span>
-                    <button className="button2" onClick={DeleteNote}>
-                      DELETE
-                    </button>
-                  </span>
-                  <span>{date}</span>
-                </div>
-              </th>
-            </tr>
-          </table>
-        </div>
-      </>
-    );
-  }
-
-  if (filter == card.tag && search == "") {
-    return (
-      <>
-        <div className="card" key={id}>
-          <table>
-            <tr>
-              <th className="colmn1">
-                <Link className="cardLink" to={"/note/" + id}>
-                  <div>
-                    <div
-                      className="colorBox"
-                      style={{
-                        backgroundColor: color,
-                        width: "100%",
-                        height: "20px",
-                      }}
-                    ></div>
-                    <h3 className="">{title}</h3>
-                    <span className="">{tag}</span>
-                    <div className="">{content}</div>
-                  </div>
-                </Link>
-              </th>
-              <th className="colmn2">
-                <div>
-                  <span>
-                    <button className="button1" onClick={addTag}>
-                      CHANGE TAG
-                    </button>
-                  </span>
-                  <span>
-                    <button className="button2" onClick={DeleteNote}>
-                      DELETE
-                    </button>
-                  </span>
-                  <span>{date}</span>
-                </div>
-              </th>
-            </tr>
-          </table>
-        </div>
-      </>
-    );
-  }
-
-  return null;
+  return renderContent();
 };
 
 export default Card;

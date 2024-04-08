@@ -3,11 +3,15 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Card from "../components/card";
 import Cookies from "universal-cookie";
+import { Modal } from "@mui/material";
+import Remind from "../components/Remind";
 
 const NotePage = () => {
+  const title="test";
   const [userId, setUserId] = useState(null);
   const [notes, setNotes] = useState([]);
   const [tag, setTag] = useState("");
+  const[open,setOpen]=useState(false);
   const [tags, setTags] = useState([]);
   const [search, setSearch] = useState("");
   const cookie = new Cookies();
@@ -67,8 +71,20 @@ const NotePage = () => {
     setTag(event.target.value);
   };
 
-  // console.log(tag);
+  // Opening reminder once on component mount
+  useEffect(() => {
+    const openRemind = () => {
+      setOpen(true);
+      console.log("Reminder opened");
+    };
 
+    const trigger =  localStorage.getItem("remindTriggered");
+    if (!trigger) {
+      openRemind();
+      localStorage.setItem("remindTriggered", "true");
+    }
+  }, []);
+  
   return (
     <>
       <div>
@@ -111,6 +127,17 @@ const NotePage = () => {
           )}
         </div>
       </div>
+      
+    <div>
+    <Modal open={open} onClose={()=>setOpen(false)}>
+        <div>
+        {notes.map((note) =>(
+              <Remind key={note.id} title={note} />
+            ))
+            }
+        </div>
+      </Modal>
+    </div>
     </>
   );
 };
