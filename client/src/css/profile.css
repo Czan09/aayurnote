@@ -36,3 +36,6 @@
   justify-content: center;
   height: 50%;
 }
+button:hover {
+  background-color: #68c7e4;
+}

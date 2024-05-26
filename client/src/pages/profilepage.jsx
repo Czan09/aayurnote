@@ -69,10 +69,11 @@ function Profile() {
           <br />
 
           <div className="centerme">
-            <Link className="link" to="/edit">
-              Edit/ChangePassword
-            </Link>
-          </div>
+  <Link className="link" to="/edit">
+    <span className="bold">Edit User</span>
+  </Link>
+</div>
+
           <br />
           <br />
           <button onClick={logOut}>Sign Out</button>

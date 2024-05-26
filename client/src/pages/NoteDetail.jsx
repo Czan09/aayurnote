@@ -11,7 +11,7 @@ const NoteDetail = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [color, setColor] = useState();
-  const [remind, setRemind] = useState(false); // Default to false
+  const [remind, setRemind] = useState(false); 
   const [tagName, setTagName] = useState("");
   const [error, setError] = useState("");
 

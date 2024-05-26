@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import "../css/listuser.css";
 import axios from "axios";
 import ListUserRow from "../components/listUserRow";
-
 const ListUser = () => {
   const [users, setUsers] = useState([]);
 
@@ -26,7 +26,7 @@ const ListUser = () => {
   }, []);
 
   return (
-    <div>
+    <div className="yoyo">
       <h1>List Users</h1>
       <table>
         <thead>
@@ -35,6 +35,7 @@ const ListUser = () => {
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>

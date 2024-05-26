@@ -6,6 +6,7 @@ import Cookies from "universal-cookie";
 import { Modal } from "@mui/material";
 import Remind from "../components/Remind";
 
+
 const NotePage = () => {
   const title="test";
   const [userId, setUserId] = useState(null);
@@ -88,21 +89,19 @@ const NotePage = () => {
   return (
     <>
       <div>
-        <div>
-          <label htmlFor="search">Search Note</label>
+        <div className="search">
           <input
             type="text"
+            placeholder="Search Note"
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-
-        <label htmlFor="tag">Filter</label>
+  
+        <label id="filter-label" htmlFor="tag">Filter</label>
         <select id="tag" value={tag} onChange={handleTagChange}>
           <option value={0}>Select a tag</option>
-          <option value={1}>no tag</option>
+          <option value={1}>No tag</option>
           {tags.map((tagItem) => (
             <option key={tagItem.id} value={tagItem.id}>
               {tagItem.tag_name}
@@ -112,9 +111,9 @@ const NotePage = () => {
       </div>
       <div>
         <Link to={"new"}>
-          <button className="new">NEW NOTE</button>
+          <button className="new">NEW</button>
         </Link>
-
+  
         <div>
           {notes.length > 0 ? (
             notes.map((note) => (
@@ -128,16 +127,15 @@ const NotePage = () => {
         </div>
       </div>
       
-    <div>
-    <Modal open={open} onClose={()=>setOpen(false)}>
-        <div>
-        {notes.map((note) =>(
+      <div>
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <div>
+            {notes.map((note) => (
               <Remind key={note.id} title={note} />
-            ))
-            }
-        </div>
-      </Modal>
-    </div>
+            ))}
+          </div>
+        </Modal>
+      </div>
     </>
   );
 };

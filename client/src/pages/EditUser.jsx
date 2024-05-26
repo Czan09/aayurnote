@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/edituser.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
@@ -97,7 +98,7 @@ const EditUser = () => {
 
   return (
     <>
-      <div>
+      <div className="motapa">
         <div>EDIT USER</div>
         <form>
           <div className="form-group">

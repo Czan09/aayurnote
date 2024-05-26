@@ -1,0 +1,39 @@
+.aviskar {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.new {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.new:hover {
+  background-color: #0b7dda;
+}
+
+.back {
+  background-color: #fff;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.No-data {
+  color: #999;
+}
+
+@media (max-width: 768px) {
+  .aviskar {
+    width: 90%;
+  }
+}

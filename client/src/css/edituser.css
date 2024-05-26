@@ -1,0 +1,52 @@
+.motapa {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center; /* Center-align content */
+  }
+  
+  .motapa > div {
+    font-weight: bold; /* Make the "EDIT USER" text bold */
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .submit-btn {
+    background-color: #0080ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #7bade6;
+  }
+  

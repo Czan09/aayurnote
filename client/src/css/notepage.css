@@ -1,15 +1,22 @@
 .new {
-  background-color: blue;
+  background-color: rgb(27, 106, 224);
   width: 60px;
   height: 60px;
   padding: 5px;
-  margin: 5em;
+  margin: 5em auto; /* Center horizontally */
   color: #fff;
   border-radius: 50%;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute; /* Position relative to its containing block */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
+  bottom: 20px; /* Adjust distance from the bottom */
 }
+
 .back {
-  /* display: flex; */
   background-color: #fff;
   width: 20%;
   height: 50px;
@@ -49,6 +56,7 @@
   margin: 0;
   padding: 0;
 }
+
 .save {
   color: #fff;
   font-weight: bold;
@@ -59,3 +67,84 @@
   margin: 0;
   padding: 0;
 }
+
+.search {
+  width: 40%;
+  margin: 20px auto; /* Center the search bar below the navbar */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.search input::placeholder {
+  color: #aaa;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Align the filter to the right side */
+#tag {
+  position: center;
+  right: 20px;
+  top: 110px; /* Adjust based on your layout */
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+/* Style for the filter label */
+#filter-label {
+  position: center;
+  right: 80px;
+  top: 80px; /* Adjusted position */
+  font-size: 150%; /* Make the text a bit larger */
+  font-weight: bold; /* Make the text bold */
+}
+
+/* Add border to Change Tag button */
+.change-tag {
+  background-color: transparent;
+  border: 2px solid rgb(72, 121, 177); /* Add border */
+  color: rgb(67, 120, 201); /* Text color */
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Add border to Delete button */
+.delete {
+  background-color: transparent;
+  border: 2px solid rgb(38, 109, 190); /* Add border */
+  color: rgb(91, 147, 230); /* Text color */
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Style for Create button */
+.create {
+  background-color: #7bade6; /* Green color */
+  border: none; /* No border */
+  color: white; /* Text color */
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect for buttons */
+.change-tag:hover, .delete:hover, .create:hover {
+  opacity: 4;
+}
+

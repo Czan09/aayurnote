@@ -51,33 +51,33 @@
 }
 
 .button1 {
-  background-color: #5dff8e;
+  background-color: #0080ff;
   color: #333333;
   background-image: url(../assets/plus-solid.svg);
   background-repeat: no-repeat;
-  border: 1px solid #5dff8e;
+  border: 1px solid #7bade6;
   padding: 5px 0;
   margin: 0;
   margin-bottom: 5px;
 }
 
 .button2 {
-  background-color: #ff0000;
+  background-color: #0080ff;
   color: #333333;
   padding: 5px 0;
   margin: 0;
   margin-bottom: 5px;
   background-image: url(../assets/trash-solid.svg);
   background-repeat: no-repeat;
-  border: 1px solid #ff0000;
+  border: 1px solid #8a8787;
 }
 
 .button1:hover {
-  border: 1px solid #4ac970;
-  background-color: #4ac970;
+  border: 1px solid #7bade6;
+  background-color: #7bade6;
 }
 
 .button2:hover {
-  border: 1px solid #da0202;
-  background-color: #da0202;
+  border: 1px solid #7bade6;
+  background-color: #7bade6;
 }

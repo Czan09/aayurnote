@@ -20,7 +20,7 @@ function LoginPage() {
         return;
       }
       const getUser = await axios.post("/api/user/email", { email: email });
-      // console.log(getUser);
+      
       if (getUser.data.length === 0) {
         console.log("User Not Found");
         setError("Email or Password is incorrect");
@@ -43,9 +43,9 @@ function LoginPage() {
           role: user.role,
         });
         console.log(tokenResponse);
-        cookies.set("token", tokenResponse.data, { path: "/" }); // Ensure you set the correct path
+        cookies.set("token", tokenResponse.data, { path: "/" }); 
 
-        // console.log("enter");
+        
         setError("");
         navigate("/");
       } else {
@@ -62,7 +62,7 @@ function LoginPage() {
       <div className="login-container">
         <h2>Login Page</h2>
         <div className="form-group">
-          <label htmlFor="email">email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
