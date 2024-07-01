@@ -20,7 +20,7 @@ function LoginPage() {
         return;
       }
       const getUser = await axios.post("/api/user/email", { email: email });
-      
+
       if (getUser.data.length === 0) {
         console.log("User Not Found");
         setError("Email or Password is incorrect");
@@ -31,8 +31,8 @@ function LoginPage() {
         password: password,
         checkPassword: user.password,
       });
-      const isPasswordCorrect = checkPassResponse.data;
-      console.log(user);
+      const isPasswordCorrect = checkPassResponse.data.isMatch;
+      console.log(isPasswordCorrect);
       if (
         email === getUser.data[0].email &&
         isPasswordCorrect &&
@@ -43,9 +43,8 @@ function LoginPage() {
           role: user.role,
         });
         console.log(tokenResponse);
-        cookies.set("token", tokenResponse.data, { path: "/" }); 
+        cookies.set("token", tokenResponse.data, { path: "/" });
 
-        
         setError("");
         navigate("/");
       } else {

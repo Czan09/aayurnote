@@ -55,7 +55,7 @@ const NotePage = () => {
             tags.map((tag) => <TagCard key={tag.id} card={tag} />)
           ) : (
             <div className="back">
-              <h3 className="No-data">NO NOTES FOUND</h3>
+              <h3 className="No-data">NO TAGS FOUND</h3>
             </div>
           )}
         </div>

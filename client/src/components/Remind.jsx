@@ -18,8 +18,11 @@ useEffect(()=>{
 if(remind){
   return (
     <>
-      <div>
-        {data}
+      <div className="pop-up">
+       Reminder of your Note 
+       <div className="pop-up">
+       {data}
+       </div>
       </div>
     </>
   )}

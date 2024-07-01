@@ -7,6 +7,7 @@ const TagCard = ({ card }) => {
   const [id, setId] = useState("");
   const [color, setColor] = useState();
   const [tag, setTag] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setTag(card.tag_name);
@@ -22,10 +23,12 @@ const TagCard = ({ card }) => {
   const deleteTag = async () => {
     console.log(id);
     try {
+      setError("");
       const deleteTag = await axios.delete("/api/tags/" + id);
       console.log(deleteTag);
       window.location.reload(false);
     } catch (e) {
+      setError("Tag is in use Cannot be deleted");
       console.log(e);
     }
   };
@@ -53,6 +56,7 @@ const TagCard = ({ card }) => {
 
             <th className="colmn2">
               <div>
+                <span>{error}</span>
                 <span>
                   <button className="button2" onClick={deleteTag}>
                     DELETE

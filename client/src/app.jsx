@@ -26,12 +26,10 @@ function App() {
             token: token,
           });
           if (isMounted) {
-            // console.log(response);
-            // console.log();
             const string = response.data.role;
             const role = string.charAt(0).toUpperCase() + string.slice(1);
-            // console.log(role);
             setUser(role || "Public");
+            isMounted=false;
           }
         } catch (error) {
           console.error("Error verifying token:", error);
