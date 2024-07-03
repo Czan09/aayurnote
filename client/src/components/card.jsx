@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/card.css";
-import axios from "axios";
+import { Modal } from "@mui/material";
+import ConformNoteDelete from "./ConformNoteDelete";
 
 const Card = ({ card, filter, search }) => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const Card = ({ card, filter, search }) => {
   const [content, setContent] = useState("");
   const [date, setDate] = useState("");
   const [tag, setTag] = useState("");
+  const [isDelete, setIsDelete] = useState(false);
 
   useEffect(() => {
     setTitle(card.title);
@@ -29,13 +31,11 @@ const Card = ({ card, filter, search }) => {
     navigate("/notes/tag/" + id);
   };
 
-  const DeleteNote = async () => {
+  const handleDelete = async () => {
     try {
-      const deleteNote = await axios.delete("/api/notes/" + id);
-      console.log(deleteNote);
-      window.location.reload(false);
-    } catch (e) {
-      console.log(e);
+      setIsDelete(true);
+    } catch (err) {
+      console.error("Failed to delete item: ", err);
     }
   };
 
@@ -53,7 +53,10 @@ const Card = ({ card, filter, search }) => {
       return renderCard();
     }
 
-    if (filter == card.tag || (filter==0 && title.toLowerCase().includes(search.toLowerCase()))) {
+    if (
+      filter == card.tag ||
+      (filter == 0 && title.toLowerCase().includes(search.toLowerCase()))
+    ) {
       return renderCard();
     }
 
@@ -89,10 +92,18 @@ const Card = ({ card, filter, search }) => {
                 </button>
               </span>
               <span>
-                <button className="button2" onClick={DeleteNote}>
-                  DELETE
+                <button className="button2" onClick={handleDelete}>
+                  Delete
                 </button>
               </span>
+              <Modal open={isDelete} onClose={handleDelete}>
+                <div>
+                  <ConformNoteDelete
+                    id={id}
+                    onClose={() => setIsDelete(false)}
+                  />
+                </div>
+              </Modal>
               <span>{date}</span>
             </div>
           </th>

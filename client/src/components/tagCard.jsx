@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/card.css";
-import axios from "axios";
+import { Modal } from "@mui/material";
+import ConfirmTagDelete from "./ConformTagDelete";
 const TagCard = ({ card }) => {
   const navigate = useNavigate();
   const [id, setId] = useState("");
   const [color, setColor] = useState();
   const [tag, setTag] = useState("");
-  const [error, setError] = useState("");
+  const [isDelete, setIsDelete] = useState(false);
 
   useEffect(() => {
     setTag(card.tag_name);
@@ -20,18 +21,9 @@ const TagCard = ({ card }) => {
     navigate("/tag/" + id);
   };
 
-  const deleteTag = async () => {
-    console.log(id);
-    try {
-      setError("");
-      const deleteTag = await axios.delete("/api/tags/" + id);
-      console.log(deleteTag);
-      window.location.reload(false);
-    } catch (e) {
-      setError("Tag is in use Cannot be deleted");
-      console.log(e);
-    }
-  };
+  function handleDelete() {
+    setIsDelete(true);
+  }
 
   console.log(card);
 
@@ -56,12 +48,19 @@ const TagCard = ({ card }) => {
 
             <th className="colmn2">
               <div>
-                <span>{error}</span>
                 <span>
-                  <button className="button2" onClick={deleteTag}>
+                  <button className="button2" onClick={handleDelete}>
                     DELETE
                   </button>
                 </span>
+                <Modal open={isDelete} onClose={handleDelete}>
+                  <div>
+                    <ConfirmTagDelete
+                      id={id}
+                      onClose={() => setIsDelete(false)}
+                    />
+                  </div>
+                </Modal>
                 <span>
                   <button className="button1" onClick={editTag}>
                     Edit
