@@ -8,10 +8,11 @@ function ConfirmTagDelete(id) {
     try {
       setError("");
       const deleteTag = await axios.delete("/api/tags/" + id.id);
-      console.log(deleteTag);
+      if (deleteTag.data == 1) {
+        setError("Tag is in use Cannot be deleted");
+      }
       window.location.reload();
     } catch (e) {
-      setError("Tag is in use Cannot be deleted");
       console.log(e);
     }
   };
