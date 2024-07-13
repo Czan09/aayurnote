@@ -37,17 +37,8 @@ const updateTagByID = async ({ id, tag_name, color }) => {
 };
 
 const deleteTagByID = async (id) => {
-  const { rows: tags } = await pool.query(`SELECT id FROM note WHERE tag=$1`, [
-    id,
-  ]);
-  if (tags.length == 0) {
-    const { rows: deletedTags } = await pool.query(
-      `DELETE FROM tags WHERE id = $1 RETURNING *`,
-      [id]
-    );
-    return deletedTags[0];
-  }
-  return 1;
+  const { rows: tags } = await pool.query(`Delete from tags where id=${id}`);
+  return tags[0];
 };
 
 module.exports = {

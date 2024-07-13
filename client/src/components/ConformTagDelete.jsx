@@ -8,11 +8,10 @@ function ConfirmTagDelete(id) {
     try {
       setError("");
       const deleteTag = await axios.delete("/api/tags/" + id.id);
-      if (deleteTag.data == 1) {
-        setError("Tag is in use Cannot be deleted");
-      }
+
       window.location.reload();
     } catch (e) {
+      setError("Tag is in use Cannot be deleted");
       console.log(e);
     }
   };
@@ -25,9 +24,12 @@ function ConfirmTagDelete(id) {
         <div className="form">
           <div className="delete">
             <p>Are You Sure?</p>
-            {error}
+            <span className="center error">{error}</span>
             <div>
               <button onClick={deleteTag}>YES</button>
+              <br />
+              <br />
+
               <button onClick={No}>NO</button>
             </div>
           </div>
